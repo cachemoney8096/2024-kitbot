@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import java.util.function.DoubleConsumer;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.IMotorController;
 
 public class Drive extends SubsystemBase{
 
@@ -30,12 +31,18 @@ public class Drive extends SubsystemBase{
 
         frontRightMotor= new WPI_VictorSPX(REPLACE_THIS_NUMBER);
         backRightMotor= new WPI_VictorSPX(REPLACE_THIS_NUMBER);
+
         differentialDrive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
+
+        backLeftMotor.follow(frontLeftMotor);
+
+        backRightMotor.follow(frontRightMotor);
     
     }
 
     public void arcadeDrive(double forwardBackward, double rotation ) {
         differentialDrive.arcadeDrive(forwardBackward, rotation);
+    
     }
 }
 
